@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeSpeed - Test Your Typing Speed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>⚡ TypeSpeed</h1>
+            <p>Test your typing speed with random quotes and statements</p>
+        </header>
+
+        <!-- Stats Bar -->
+        <section class="stats-card">
+            <div class="stat">
+                <span class="label">Time</span>
+                <span class="value" id="timer">0s</span>
+            </div>
+            <div class="stat">
+                <span class="label">WPM</span>
+                <span class="value" id="wpm">0</span>
+            </div>
+            <div class="stat">
+                <span class="label">Accuracy</span>
+                <span class="value" id="accuracy">100%</span>
+            </div>
+            <div class="stat">
+                <span class="label">High Score</span>
+                <span class="value highlight" id="highScore">0 WPM</span>
+            </div>
+        </section>
+
+        <!-- Quote Display Area -->
+        <section class="quote-box">
+            <div id="loading" class="loading-spinner">Fetching new quote...</div>
+            <div id="quoteDisplay" class="quote-display"></div>
+        </section>
+
+        <!-- Typing Input -->
+        <section class="input-container">
+            <textarea 
+                id="quoteInput" 
+                placeholder="Start typing here when the text appears..." 
+                rows="3" 
+                autofocus></textarea>
+        </section>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="nextBtn" class="btn">Next Quote ↻</button>
+            <button id="resetHighScoreBtn" class="btn btn-secondary">Reset High Score</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
