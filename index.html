@@ -60,5 +60,32 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Result Modal Popup -->
+    <div id="resultModal" class="modal-overlay">
+        <div class="modal-card">
+            <h2>🎉 Test Completed!</h2>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span>Speed</span>
+                    <strong id="modalWpm">0 WPM</strong>
+                </div>
+                <div class="modal-stat">
+                    <span>Accuracy</span>
+                    <strong id="modalAccuracy">100%</strong>
+                </div>
+                <div class="modal-stat">
+                    <span>Time</span>
+                    <strong id="modalTime">0s</strong>
+                </div>
+            </div>
+            <p id="highScoreNotice" class="high-score-notice" style="display: none;">🏆 New High Score!</p>
+            <div class="modal-actions">
+                <button id="modalNextBtn" class="btn">New Game ↻</button>
+                <button id="modalExitBtn" class="btn btn-secondary">Exit</button>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
