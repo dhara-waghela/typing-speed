@@ -1,7 +1,6 @@
-//const API_URL = 'https://dummyjson.com/quotes/random';
 const API_URL = 'https://quoteslate.vercel.app/api/quotes/random';
- 
-// DOM Elements
+
+// DOM Elements - Main Page
 const quoteDisplay = document.getElementById('quoteDisplay');
 const quoteInput = document.getElementById('quoteInput');
 const loadingElement = document.getElementById('loading');
@@ -11,6 +10,15 @@ const accuracyElement = document.getElementById('accuracy');
 const highScoreElement = document.getElementById('highScore');
 const nextBtn = document.getElementById('nextBtn');
 const resetHighScoreBtn = document.getElementById('resetHighScoreBtn');
+
+// DOM Elements - Modal Popup
+const resultModal = document.getElementById('resultModal');
+const modalWpm = document.getElementById('modalWpm');
+const modalAccuracy = document.getElementById('modalAccuracy');
+const modalTime = document.getElementById('modalTime');
+const highScoreNotice = document.getElementById('highScoreNotice');
+const modalNextBtn = document.getElementById('modalNextBtn');
+const modalExitBtn = document.getElementById('modalExitBtn');
 
 // State Variables
 let timerInterval = null;
@@ -26,6 +34,7 @@ fetchNewQuote();
 // Fetch a new random quote from the API
 async function fetchNewQuote() {
     resetState();
+    closeModal();
     loadingElement.style.display = 'block';
     quoteDisplay.innerHTML = '';
     quoteInput.disabled = true;
@@ -104,7 +113,7 @@ function getElapsedTimeInSeconds() {
 
 function updateWPM(elapsedSeconds) {
     if (elapsedSeconds === 0) return;
-    const typedWords = quoteInput.value.trim().length / 5; // Standard WPM measure (5 chars = 1 word)
+    const typedWords = quoteInput.value.trim().length / 5;
     const wpm = Math.round((typedWords / elapsedSeconds) * 60);
     wpmElement.innerText = wpm >= 0 ? wpm : 0;
 }
@@ -119,22 +128,41 @@ function updateAccuracy(totalTypedChars) {
     accuracyElement.innerText = `${accuracy}%`;
 }
 
+// Called when test is finished
 function completeTest() {
     clearInterval(timerInterval);
     const finalWpm = parseInt(wpmElement.innerText);
+    const finalAccuracy = accuracyElement.innerText;
+    const finalTime = timerElement.innerText;
 
-    // Check for new High Score
+    // Check high score
     if (finalWpm > highScore) {
         highScore = finalWpm;
         localStorage.setItem('typingHighScore', highScore);
         highScoreElement.innerText = `${highScore} WPM`;
-        alert(`🎉 New High Score: ${finalWpm} WPM!`);
+        highScoreNotice.style.display = 'block';
+    } else {
+        highScoreNotice.style.display = 'none';
     }
 
     quoteInput.disabled = true;
+
+    // Show custom modal popup
+    showModal(finalWpm, finalAccuracy, finalTime);
 }
 
-// Reset state between tests
+// Modal Functions
+function showModal(wpm, accuracy, time) {
+    modalWpm.innerText = `${wpm} WPM`;
+    modalAccuracy.innerText = accuracy;
+    modalTime.innerText = time;
+    resultModal.classList.add('active');
+}
+
+function closeModal() {
+    resultModal.classList.remove('active');
+}
+
 function resetState() {
     clearInterval(timerInterval);
     isTesting = false;
@@ -146,11 +174,18 @@ function resetState() {
     quoteInput.disabled = false;
 }
 
-// Control Buttons
+// Event Listeners
 nextBtn.addEventListener('click', fetchNewQuote);
 
 resetHighScoreBtn.addEventListener('click', () => {
     localStorage.removeItem('typingHighScore');
     highScore = 0;
     highScoreElement.innerText = '0 WPM';
+});
+
+// Modal Action Buttons
+modalNextBtn.addEventListener('click', fetchNewQuote);
+
+modalExitBtn.addEventListener('click', () => {
+    closeModal();
 });
