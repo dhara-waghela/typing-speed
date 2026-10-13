@@ -1,5 +1,6 @@
-const API_URL = 'https://dummyjson.com/quotes/random';
-
+//const API_URL = 'https://dummyjson.com/quotes/random';
+const API_URL = [https://api.quotable.io/random](https://api.quotable.io/random)
+ 
 // DOM Elements
 const quoteDisplay = document.getElementById('quoteDisplay');
 const quoteInput = document.getElementById('quoteInput');
@@ -32,7 +33,7 @@ async function fetchNewQuote() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        const quoteText = data.quote;
+        const quoteText = data.content;
 
         // Render each character wrapped in a span
         quoteText.split('').forEach(char => {
