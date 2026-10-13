@@ -2,7 +2,7 @@
 
 A lightweight, modern web application built to measure typing speed (WPM) and accuracy in real-time. Statements are fetched dynamically using a REST API, ensuring a new sentence on every attempt.
 
-![TypeSpeed Preview](https://img.shields.io/badge/Status-Active-brightgreen) ![License](https://img.shields.io/badge/License-MIT-blue)
+![TypeSpeed Preview](https://img.shields.io/badge/Status-Active-brightgreen)
 
 ## Features
 
