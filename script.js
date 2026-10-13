@@ -1,4 +1,4 @@
-const API_URL = 'https://quoteslate.vercel.app/api/quotes/random';
+const API_URL = 'https://dummyjson.com/quotes/random';
 
 // DOM Elements - Main Page
 const quoteDisplay = document.getElementById('quoteDisplay');
@@ -42,7 +42,7 @@ async function fetchNewQuote() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        const quoteText = data.quote;
+        const quoteText = data.quote; // DummyJSON uses 'quote'
 
         // Render each character wrapped in a span
         quoteText.split('').forEach(char => {
